@@ -21,6 +21,8 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 
+libraryDependencies += "org.spire-math" %% "cats" % "0.2.0"
 
+libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.4"
 
 
