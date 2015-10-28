@@ -21,12 +21,12 @@ toRun.run
 val state2=transform("key5",true)
 
 
-val hmm=for{
+val transformation=for{
   s1<-transform("key4",4.0,"")
   s2<-transform("key5",5.0,s1)
 } yield s2
 
-hmm.run(dictionary).run
+transformation.run(dictionary).run
 
 state.flatMap(log=>transform("key5",true,log)).run(dictionary).run
 

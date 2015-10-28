@@ -77,15 +77,6 @@ object WriterSparkExample {
   .mapWritten(_ :+ "before business join") //<--- haaa this line is interesting!!
   .flatMap(businessJoinPhase)
 
-    //compare to state
-    /*
-     val transformation1:Log => State[DataDictionary,Log] =initialLog => for{
-      log1 <- State(addTimestampPhase(initialLog))
-      log2 <- State(addLabelPhase(log1))
-      log3 <- State(businessJoinPhase(log2))
-    } yield log3
-     */
-
     //transformation2
     val importantSelect:DataFrame => DataFrame = _.select("customerId","credit","label","created")
     val importantSelectPhase =liftToTransformation(importantSelect)("JoinedByBusinessRules")("BusinessReport")
