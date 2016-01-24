@@ -22,6 +22,8 @@ libraryDependencies ++= Seq(
 )
 // Testing
 
+libraryDependencies += "org.scalacheck" % "scalacheck_2.11" % "1.12.5"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 
 libraryDependencies += "org.spire-math" %% "cats" % "0.2.0"
