@@ -28,6 +28,7 @@ libraryDependencies += "org.spire-math" %% "cats" % "0.2.0"
 
 libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.4"
 
+resolvers += "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/"
 
 
 
