@@ -1,36 +1,45 @@
+import sbt.Keys._
 
-// General
+val akkaVersion = "2.4.16"
 
-organization := "pl.pawelwlodarski"
+//akka
+val akka = "com.typesafe.akka" %% "akka-actor" % akkaVersion
+val akkaSLF = "com.typesafe.akka" %% "akka-slf4j" % akkaVersion
+val akkaTest = "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "it"
+val akkaStream = "com.typesafe.akka" %% "akka-stream" % akkaVersion
+val akkaStreamsTest = "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % "it"
 
-name := """blogcode"""
+//functional
+val cats = "org.typelevel" %% "cats" % "0.9.0"
 
-version := "1.0.0-SNAPSHOT"
+//infa
+val logback = "ch.qos.logback" % "logback-classic" % "1.1.7"
 
-//scalaVersion := "2.10.4"
-scalaVersion := "2.11.7"
+//test
+val scalacheck = "org.scalacheck" %% "scalacheck" % "1.13.4"
+val scalatest = "org.scalatest" %% "scalatest" % "3.0.1" % "test,it"
 
-scalacOptions += "-deprecation"
+val root = (project in file("."))
+  .configs(IntegrationTest)
+    .settings(Defaults.itSettings: _*)
+  .settings(
+    organization := "pl.pawelwlodarski",
+    name := """blogcode""",
+    version := "1.0.0-SNAPSHOT",
+    scalaVersion := "2.12.1",
+    scalacOptions += "-deprecation"
+  )
+  .settings(
+    libraryDependencies ++= Seq(
+      akka, akkaSLF, akkaTest, akkaStream, akkaStreamsTest,
+      scalacheck, scalatest,
+      logback
+    )
+  )
 
-val macroParaside = compilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full)
-val kindProjector = compilerPlugin("org.spire-math" %% "kind-projector" % "0.5.2")
 
-libraryDependencies ++= Seq(
-  "org.xerial.snappy" % "snappy-java" % "1.0.5",
-  "org.apache.spark" %% "spark-sql" % "1.5.1",
-  macroParaside
-)
-// Testing
 
-libraryDependencies += "org.scalacheck" % "scalacheck_2.11" % "1.12.5"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.5" % "test"
-
-libraryDependencies += "org.spire-math" %% "cats" % "0.2.0"
-
-libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.4"
-
-resolvers += "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/"
 
 
 
